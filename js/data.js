@@ -223,37 +223,6 @@ export async function fetchCommodities() {
     return results;
 }
 
-// Fetch flight data from OpenSky Network
-export async function fetchFlightData(bounds = null) {
-    try {
-        let url = 'https://opensky-network.org/api/states/all';
-        if (bounds) {
-            url += `?lamin=${bounds.south}&lomin=${bounds.west}&lamax=${bounds.north}&lomax=${bounds.east}`;
-        }
-
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Flight API error');
-
-        const data = await response.json();
-        if (!data.states) return [];
-
-        return data.states.slice(0, 100).map(state => ({
-            icao24: state[0],
-            callsign: (state[1] || '').trim(),
-            country: state[2],
-            lat: state[6],
-            lon: state[5],
-            altitude: state[7],
-            heading: state[10],
-            velocity: state[9],
-            onGround: state[8]
-        })).filter(f => f.lat && f.lon && !f.onGround);
-    } catch (error) {
-        console.error('Error fetching flight data:', error);
-        return [];
-    }
-}
-
 // Fetch congressional trades
 export async function fetchCongressTrades() {
     // Uses proxy to fetch from House Stock Watcher or similar
