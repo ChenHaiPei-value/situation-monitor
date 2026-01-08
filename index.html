@@ -912,6 +912,289 @@
             50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
         }
 
+        /* US Breaking News Hotspots */
+        .us-hotspot {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+            z-index: 30;
+            cursor: pointer;
+        }
+
+        .us-hotspot-marker {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        .us-hotspot-ring {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: hotspot-pulse 2s ease-out infinite;
+        }
+
+        .us-hotspot.high .us-hotspot-ring {
+            border-color: #ff4444;
+        }
+
+        .us-hotspot.elevated .us-hotspot-ring {
+            border-color: #ffaa00;
+        }
+
+        .us-hotspot.medium .us-hotspot-ring {
+            border-color: #44aaff;
+        }
+
+        .us-hotspot-glow {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .us-hotspot.high .us-hotspot-glow {
+            background: radial-gradient(circle, rgba(255, 68, 68, 0.4) 0%, transparent 70%);
+            animation: glow-pulse 1.5s ease-in-out infinite;
+        }
+
+        .us-hotspot.elevated .us-hotspot-glow {
+            background: radial-gradient(circle, rgba(255, 170, 0, 0.3) 0%, transparent 70%);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        .us-hotspot.medium .us-hotspot-glow {
+            background: radial-gradient(circle, rgba(68, 170, 255, 0.25) 0%, transparent 70%);
+        }
+
+        @keyframes hotspot-pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .us-hotspot-label {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.55rem;
+            font-weight: bold;
+            white-space: nowrap;
+            text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .us-hotspot.high .us-hotspot-label {
+            color: #ff6666;
+        }
+
+        .us-hotspot.elevated .us-hotspot-label {
+            color: #ffcc44;
+        }
+
+        .us-hotspot.medium .us-hotspot-label {
+            color: #66bbff;
+        }
+
+        .us-hotspot:hover .us-hotspot-label {
+            opacity: 1;
+        }
+
+        .us-hotspot-category {
+            font-size: 0.4rem;
+            opacity: 0.7;
+            font-weight: normal;
+        }
+
+        /* US Hotspot Popup */
+        .us-hotspot-popup {
+            display: none;
+            position: absolute;
+            z-index: 100;
+            background: rgba(10, 20, 30, 0.95);
+            border: 1px solid rgba(255, 100, 100, 0.4);
+            border-radius: 4px;
+            width: 320px;
+            max-height: 400px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            pointer-events: auto;
+        }
+
+        .us-hotspot-popup.visible {
+            display: block;
+        }
+
+        .us-hotspot-popup-header {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255, 100, 100, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .us-hotspot-popup.high .us-hotspot-popup-header {
+            background: rgba(255, 68, 68, 0.15);
+        }
+
+        .us-hotspot-popup.elevated .us-hotspot-popup-header {
+            background: rgba(255, 170, 0, 0.15);
+            border-color: rgba(255, 170, 0, 0.3);
+        }
+
+        .us-hotspot-popup.medium .us-hotspot-popup-header {
+            background: rgba(68, 170, 255, 0.1);
+            border-color: rgba(68, 170, 255, 0.3);
+        }
+
+        .us-hotspot-popup-title {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ff8888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .us-hotspot-popup.elevated .us-hotspot-popup-title {
+            color: #ffcc44;
+        }
+
+        .us-hotspot-popup.medium .us-hotspot-popup-title {
+            color: #66bbff;
+        }
+
+        .us-hotspot-popup-level {
+            font-size: 0.5rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .us-hotspot-popup-level.high {
+            background: rgba(255, 68, 68, 0.3);
+            color: #ff8888;
+        }
+
+        .us-hotspot-popup-level.elevated {
+            background: rgba(255, 170, 0, 0.3);
+            color: #ffcc44;
+        }
+
+        .us-hotspot-popup-level.medium {
+            background: rgba(68, 170, 255, 0.2);
+            color: #66bbff;
+        }
+
+        .us-hotspot-popup-meta {
+            padding: 0.6rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+            border-bottom: 1px solid rgba(255, 100, 100, 0.2);
+            font-size: 0.55rem;
+        }
+
+        .us-hotspot-popup-meta-label {
+            color: #664444;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .us-hotspot-popup-meta-value {
+            color: #cc8888;
+        }
+
+        .us-hotspot-popup-desc {
+            padding: 0.75rem 1rem;
+            font-size: 0.65rem;
+            color: #ccaaaa;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(255, 100, 100, 0.2);
+        }
+
+        .us-hotspot-popup-headlines-title {
+            font-size: 0.5rem;
+            color: #664444;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 1rem 0.3rem;
+        }
+
+        .us-hotspot-popup-headlines {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .us-hotspot-popup-headline {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 100, 100, 0.15);
+            font-size: 0.6rem;
+            color: #ddbbbb;
+            line-height: 1.4;
+            transition: background 0.2s;
+        }
+
+        .us-hotspot-popup-headline:hover {
+            background: rgba(255, 100, 100, 0.1);
+        }
+
+        .us-hotspot-popup-headline a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .us-hotspot-popup-headline a:hover {
+            color: #ff9999;
+        }
+
+        .us-hotspot-popup-headline-source {
+            font-size: 0.45rem;
+            color: #664444;
+            text-transform: uppercase;
+            margin-bottom: 0.15rem;
+        }
+
+        .us-hotspot-popup-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: #886666;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .us-hotspot-popup-close:hover {
+            color: #ff8888;
+        }
+
         /* US City Popup */
         .us-city-popup {
             display: none;
@@ -4935,6 +5218,66 @@
             }
         ];
 
+        // US Breaking News Hotspots - Major ongoing stories
+        const US_HOTSPOTS = [
+            {
+                id: 'mn-daycare-fraud',
+                name: 'Minnesota Daycare Fraud',
+                location: 'Minneapolis, MN',
+                lat: 44.9778,
+                lon: -93.2650,
+                level: 'high',
+                category: 'Federal Investigation',
+                description: 'Massive $250M+ fraud scheme involving Feeding Our Future nonprofit. Largest pandemic-era fraud case. Multiple convictions and ongoing trials.',
+                keywords: ['minnesota', 'daycare', 'fraud', 'feeding our future', 'minneapolis', 'pandemic fraud', 'child nutrition', 'somali'],
+                startDate: '2022',
+                status: 'Active Investigation',
+                icon: '⚠'
+            },
+            {
+                id: 'la-wildfires',
+                name: 'California Wildfires',
+                location: 'Los Angeles, CA',
+                lat: 34.0522,
+                lon: -118.2437,
+                level: 'high',
+                category: 'Natural Disaster',
+                description: 'Ongoing wildfire emergency in Los Angeles area. Multiple fires, evacuations, and widespread destruction.',
+                keywords: ['california', 'wildfire', 'los angeles', 'fire', 'evacuation', 'palisades', 'eaton', 'altadena'],
+                startDate: '2025',
+                status: 'Active Emergency',
+                icon: '🔥'
+            },
+            {
+                id: 'border-crisis',
+                name: 'Border Enforcement',
+                location: 'El Paso, TX',
+                lat: 31.7619,
+                lon: -106.4850,
+                level: 'elevated',
+                category: 'Immigration',
+                description: 'Ongoing migration and border enforcement actions. Policy changes, deportations, and humanitarian concerns.',
+                keywords: ['border', 'immigration', 'migrant', 'el paso', 'texas', 'cbp', 'deportation', 'ice'],
+                startDate: '2024',
+                status: 'Ongoing',
+                icon: '🚨'
+            },
+            {
+                id: 'ai-regulation',
+                name: 'AI & Tech Policy',
+                location: 'San Francisco, CA',
+                lat: 37.7749,
+                lon: -122.4194,
+                level: 'medium',
+                category: 'Technology',
+                description: 'Major tech companies facing regulatory scrutiny. AI safety debates, antitrust actions, and policy formation.',
+                keywords: ['openai', 'anthropic', 'google ai', 'ai regulation', 'artificial intelligence', 'tech regulation', 'deepseek'],
+                startDate: '2024',
+                status: 'Developing',
+                icon: '🤖'
+            }
+        ];
+
         // Current map view mode
         let mapViewMode = 'global'; // 'global' or 'us'
 
@@ -6196,6 +6539,52 @@
                         </div>
                     `;
                 });
+
+                // US Breaking News Hotspots
+                US_HOTSPOTS.forEach(hotspot => {
+                    const projected = projection([hotspot.lon, hotspot.lat]);
+                    if (!projected) return;
+
+                    const posX = (projected[0] / width) * 100;
+                    const posY = (projected[1] / height) * 100;
+
+                    // Check for matching news
+                    let matchCount = 0;
+                    let matchedHeadlines = [];
+                    if (allNews && allNews.length > 0) {
+                        matchedHeadlines = allNews.filter(item => {
+                            const title = (item.title || '').toLowerCase();
+                            return hotspot.keywords.some(kw => title.includes(kw.toLowerCase()));
+                        });
+                        matchCount = matchedHeadlines.length;
+                    }
+
+                    // Store hotspot data for popup
+                    const hotspotData = encodeURIComponent(JSON.stringify({
+                        ...hotspot,
+                        matchCount,
+                        headlines: matchedHeadlines.slice(0, 8)
+                    }));
+
+                    overlaysHTML += `
+                        <div class="us-hotspot ${hotspot.level}"
+                             style="left: ${posX}%; top: ${posY}%;"
+                             data-us-hotspot-id="${hotspot.id}"
+                             data-us-hotspot-info="${hotspotData}"
+                             onclick="showUSHotspotPopup(event, '${hotspot.id}')">
+                            <div class="us-hotspot-glow"></div>
+                            <div class="us-hotspot-ring"></div>
+                            <div class="us-hotspot-marker">${hotspot.icon}</div>
+                            <div class="us-hotspot-label">
+                                ${hotspot.name}
+                                <div class="us-hotspot-category">${hotspot.category}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Add US hotspot popup container
+                overlaysHTML += `<div class="us-hotspot-popup" id="usHotspotPopup"></div>`;
             }
 
             // Layer toggle buttons (only for global view)
@@ -6250,6 +6639,9 @@
                 if (!e.target.closest('.us-city') && !e.target.closest('.us-city-popup')) {
                     hideUSCityPopup();
                 }
+                if (!e.target.closest('.us-hotspot') && !e.target.closest('.us-hotspot-popup')) {
+                    hideUSHotspotPopup();
+                }
             });
         }
 
@@ -6266,6 +6658,7 @@
             hideCyberPopup();
             hideCustomHotspotPopup();
             hideUSCityPopup();
+            hideUSHotspotPopup();
 
             const activityData = JSON.parse(decodeURIComponent(hotspotEl.dataset.hotspotActivity));
             const popup = document.getElementById('hotspotPopup');
@@ -6373,6 +6766,7 @@
             hideCyberPopup();
             hideCustomHotspotPopup();
             hideUSCityPopup();
+            hideUSHotspotPopup();
 
             const conflictData = JSON.parse(decodeURIComponent(conflictEl.dataset.conflictInfo));
             const popup = document.getElementById('conflictPopup');
@@ -6487,6 +6881,7 @@
             hideQuakePopup();
             hideCyberPopup();
             hideCustomHotspotPopup();
+            hideUSHotspotPopup();
 
             const cityData = JSON.parse(decodeURIComponent(cityEl.dataset.cityInfo));
             const popup = document.getElementById('usCityPopup');
@@ -6575,6 +6970,103 @@
             }
         }
 
+        // Show US hotspot popup
+        function showUSHotspotPopup(event, hotspotId) {
+            event.stopPropagation();
+
+            const hotspotEl = document.querySelector(`[data-us-hotspot-id="${hotspotId}"]`);
+            if (!hotspotEl) return;
+
+            // Hide other popups
+            hideHotspotPopup();
+            hideConflictPopup();
+            hideChokepointPopup();
+            hideQuakePopup();
+            hideCyberPopup();
+            hideCustomHotspotPopup();
+            hideUSCityPopup();
+
+            const hotspotData = JSON.parse(decodeURIComponent(hotspotEl.dataset.usHotspotInfo));
+            const popup = document.getElementById('usHotspotPopup');
+
+            // Build headlines HTML
+            let headlinesHTML = '';
+            if (hotspotData.headlines && hotspotData.headlines.length > 0) {
+                headlinesHTML = hotspotData.headlines.map(h => `
+                    <div class="us-hotspot-popup-headline">
+                        <div class="us-hotspot-popup-headline-source">${escapeHtml(h.source || 'News')}</div>
+                        <a href="${h.link || '#'}" target="_blank">${escapeHtml(h.title)}</a>
+                    </div>
+                `).join('');
+            } else {
+                headlinesHTML = '<div class="us-hotspot-popup-headline" style="color: #666;">No matching headlines found</div>';
+            }
+
+            popup.className = `us-hotspot-popup ${hotspotData.level}`;
+            popup.innerHTML = `
+                <button class="us-hotspot-popup-close" onclick="hideUSHotspotPopup()">&times;</button>
+                <div class="us-hotspot-popup-header">
+                    <span class="us-hotspot-popup-title">${hotspotData.icon} ${escapeHtml(hotspotData.name)}</span>
+                    <span class="us-hotspot-popup-level ${hotspotData.level}">${hotspotData.level.toUpperCase()}</span>
+                </div>
+                <div class="us-hotspot-popup-meta">
+                    <div>
+                        <span class="us-hotspot-popup-meta-label">Location</span>
+                        <span class="us-hotspot-popup-meta-value">${escapeHtml(hotspotData.location)}</span>
+                    </div>
+                    <div>
+                        <span class="us-hotspot-popup-meta-label">Category</span>
+                        <span class="us-hotspot-popup-meta-value">${escapeHtml(hotspotData.category)}</span>
+                    </div>
+                    <div>
+                        <span class="us-hotspot-popup-meta-label">Since</span>
+                        <span class="us-hotspot-popup-meta-value">${escapeHtml(hotspotData.startDate)}</span>
+                    </div>
+                    <div>
+                        <span class="us-hotspot-popup-meta-label">Status</span>
+                        <span class="us-hotspot-popup-meta-value">${escapeHtml(hotspotData.status)}</span>
+                    </div>
+                </div>
+                <div class="us-hotspot-popup-desc">${escapeHtml(hotspotData.description)}</div>
+                <div class="us-hotspot-popup-headlines-title">Related Headlines (${hotspotData.matchCount || 0})</div>
+                <div class="us-hotspot-popup-headlines">
+                    ${headlinesHTML}
+                </div>
+            `;
+
+            popup.classList.add('visible');
+
+            // Position popup near the hotspot
+            const mapRect = document.getElementById('worldMapContainer').getBoundingClientRect();
+            const hotspotRect = hotspotEl.getBoundingClientRect();
+            const popupWidth = 320;
+            const popupHeight = 400;
+
+            let left = hotspotRect.left - mapRect.left + 30;
+            let top = hotspotRect.top - mapRect.top - 50;
+
+            // Adjust if popup would go off screen
+            if (left + popupWidth > mapRect.width) {
+                left = hotspotRect.left - mapRect.left - popupWidth - 30;
+            }
+            if (top + popupHeight > mapRect.height) {
+                top = mapRect.height - popupHeight - 10;
+            }
+            if (top < 10) top = 10;
+            if (left < 10) left = 10;
+
+            popup.style.left = left + 'px';
+            popup.style.top = top + 'px';
+        }
+
+        // Hide US hotspot popup
+        function hideUSHotspotPopup() {
+            const popup = document.getElementById('usHotspotPopup');
+            if (popup) {
+                popup.classList.remove('visible');
+            }
+        }
+
         // Escape HTML for popup content
         function escapeHtml(text) {
             if (!text) return '';
@@ -6596,6 +7088,7 @@
             hideCyberPopup();
             hideCustomHotspotPopup();
             hideUSCityPopup();
+            hideUSHotspotPopup();
             hideConflictPopup();
 
             const cpData = JSON.parse(decodeURIComponent(cpEl.dataset.chokepointInfo));
@@ -6686,6 +7179,7 @@
             hideCyberPopup();
             hideCustomHotspotPopup();
             hideUSCityPopup();
+            hideUSHotspotPopup();
             hideConflictPopup();
 
             const eqData = JSON.parse(decodeURIComponent(quakeEl.dataset.quakeInfo));
@@ -6798,6 +7292,7 @@
             hideQuakePopup();
             hideCustomHotspotPopup();
             hideUSCityPopup();
+            hideUSHotspotPopup();
             hideConflictPopup();
 
             const czData = JSON.parse(decodeURIComponent(cyberEl.dataset.cyberInfo));
@@ -6880,6 +7375,7 @@
             hideQuakePopup();
             hideCyberPopup();
             hideUSCityPopup();
+            hideUSHotspotPopup();
             hideConflictPopup();
 
             const monitorData = JSON.parse(decodeURIComponent(hotspotEl.dataset.monitorInfo));
