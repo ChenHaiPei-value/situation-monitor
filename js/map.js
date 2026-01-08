@@ -802,7 +802,10 @@ export async function renderGlobalMap(activityData, earthquakes = [], allNews = 
         </div>
     `;
 
-    document.getElementById('mapOverlays').innerHTML = overlaysHTML;
+    const mapOverlaysEl = document.getElementById('mapOverlays');
+    if (mapOverlaysEl) {
+        mapOverlaysEl.innerHTML = overlaysHTML;
+    }
 
     // Initialize map pan functionality
     initMapPan();
