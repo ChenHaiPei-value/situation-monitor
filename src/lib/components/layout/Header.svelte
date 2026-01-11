@@ -135,7 +135,8 @@
 		display: flex;
 		align-items: center;
 		gap: 0.3rem;
-		padding: 0.4rem 0.6rem;
+		min-height: 2.75rem;
+		padding: 0.4rem 0.75rem;
 		background: transparent;
 		border: 1px solid var(--border);
 		border-radius: 4px;

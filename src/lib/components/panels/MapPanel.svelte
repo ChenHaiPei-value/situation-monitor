@@ -650,8 +650,8 @@
 	}
 
 	.zoom-btn {
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -659,7 +659,7 @@
 		border: 1px solid #333;
 		border-radius: 4px;
 		color: #aaa;
-		font-size: 0.8rem;
+		font-size: 1rem;
 		cursor: pointer;
 	}
 
